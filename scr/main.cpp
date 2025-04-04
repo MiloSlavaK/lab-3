@@ -1,28 +1,12 @@
 #include <iostream>
-class Cat{
+class Book{
 public:
-  Cat() {};
-  ~Cat() {};
-};
-class Dog{
-public:
-  Dog() {};
-  ~Dog() {};
-};
-class Animals {
-public:
-    Animals() {
-        a = new Cat();
-        b = new Dog();
-    }
-    
-    ~Animals() {}
-    
-private:
-    Cat* a;
-    Dog* b;
+  Book() { std::cout << "Add new book\n";};
+  ~Book() {std::cout << "Remove book\n";};
 };
 int main() {
-Animals vet;
-return 0;
-}
+  int count = 10;
+  for (int i = 0; i < count; ++i) {
+    Book* new_book = new Book();
+  }
+  }
