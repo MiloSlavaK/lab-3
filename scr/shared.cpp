@@ -5,7 +5,7 @@
 // Класс изображения
 class Image {
 public:
-    Image(const std::string& name) : name(name), width(1920), height(1080) {
+    Image(const std::string& name) : name(name) {
         std::cout << "Add image: " << name << std::endl;
     }
 
@@ -14,26 +14,21 @@ public:
     }
 
     void display() const {
-        std::cout << name << " (" << width << "x" << height << ")" << std::endl;
+        std::cout << name << std::endl;
     }
 
 private:
     std::string name;
-    int width, height;
 };
 
-// Класс окна, которое отображает изображение
+// Класс окна, которое открывает изображение
 class Window {
 public:
     Window(std::shared_ptr<Image> img) : image(img) {
         std::cout << "Open window\n";
     }
-
-    void show() {
-        if (image) {
-            std::cout << "On display: ";
-            image->display();
-        }
+    ~Window() {
+        std::cout << "Close window\n";
     }
 
 private:
@@ -41,32 +36,19 @@ private:
 };
 
 int main() {
-    // Создаем общее изображение
-    auto sharedImage = std::make_shared<Image>("Im1.jpg");
+    // Создаем изображение
+    auto Photo = std::make_shared<Image>("image.jpg");
 
-    std::cout << "Counter: " << sharedImage.use_count() << std::endl;
+    std::cout << "Counter: " << Photo.use_count() << std::endl;
 
-    // Создаем окна, использующие общее изображение
-    Window window1(sharedImage);
-    Window window2(sharedImage);
+    // Создаем окна, использующие это изображение
+    Window window1(Photo);
+    Window window2(Photo);
 
-    std::cout << "Counter: " << sharedImage.use_count() << std::endl;
 
-    // Показываем изображения в окнах
-    window1.show();
-    window2.show();
-
-    // Создаем вектор с дополнительными ссылками
-    std::vector<std::shared_ptr<Image>> imageReferences;
-    imageReferences.push_back(sharedImage);
-
-    std::cout << "Counter: " << sharedImage.use_count() << std::endl;
-
-    // Очищаем вектор
-    imageReferences.clear();
-
-    std::cout << "Counter: " << sharedImage.use_count() << std::endl;
+    std::cout << "Counter: " << Photo.use_count() << std::endl;
 
     return 0;
 }
+
 
