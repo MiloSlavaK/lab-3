@@ -1,19 +1,19 @@
 #include <iostream>
 #include <vector>
 
-class Book {
+class File {
 public:
-    Book() { std::cout << "Add new book\n"; }
-    ~Book() { std::cout << "Remove book\n"; }
+    File() { std::cout << "Add new file\n"; }
+    ~File() { std::cout << "Delete file\n"; }
 };
 
 int main() {
     int count = 10;
-    std::vector<Book> books;
-    
+    std::vector<File> folder;
+
     for (int i = 0; i < count; ++i) {
-        books.emplace_back();
+        folder.emplace_back();
     }
-    
+
     return 0;
 }
